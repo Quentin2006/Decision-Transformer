@@ -1,0 +1,20 @@
+[project]
+name = "decision-transformer"
+version = "0.1.0"
+description = "CartPole dataset generation for a Decision Transformer (CS 446)"
+requires-python = ">=3.12"
+dependencies = [
+    "gymnasium[classic-control]>=1.4.0",
+    "matplotlib>=3.11.2",
+    "numpy>=2.5.5",
+    "stable-baselines3>=2.9.2",
+    "torch>=2.15.0",
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu" }]
