@@ -10,9 +10,9 @@ Requires [uv](https://docs.astral.sh/uv/); Python 3.12 is pinned in `.python-ver
 
 ```bash
 make setup                                       # uv sync
-make dataset                                     # seed 0, 50k steps, live window at 4x
+make dataset                                     # seed 0, 100k steps, live window at 4x
 make dataset-headless                            # same training, no window
-make dataset ARGS="--seed 3 --timesteps 50000"   # any generate_dataset.py flags
+make dataset ARGS="--seed 3 --timesteps 100000"   # any generate_dataset.py flags
 make clean-data                                  # rm -rf data
 ```
 
@@ -23,6 +23,13 @@ Outputs:
 
 - `data/cartpole_dqn.pkl`: the dataset, a pickled list of trajectory dicts
 - `data/returns.png`: return per episode with a 20-episode moving average
+
+`make train`, `make eval`, and `make experiments` use CUDA when available and
+otherwise run on CPU. Pass `ARGS="--device cuda"` to require CUDA or
+`ARGS="--device cpu"` to force CPU. Setup installs the CUDA 13.2 PyTorch build
+on Linux and Windows; a compatible NVIDIA driver is needed only to use CUDA.
+Checkpoints saved on CUDA also work on CPU. If the experiment grid runs out of
+GPU memory, pass `ARGS="--device cuda --workers 1"`.
 
 ## What is a DQN (Deep Q-Network)?
 

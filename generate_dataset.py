@@ -64,7 +64,7 @@ def parse_args():
     parser.add_argument(
         "--timesteps",
         type=int,
-        default=50_000,
+        default=100_000,
         help="total environment steps for DQN training",
     )
     parser.add_argument(

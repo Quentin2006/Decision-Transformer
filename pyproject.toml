@@ -1,7 +1,7 @@
 [project]
 name = "decision-transformer"
 version = "0.1.0"
-description = "CartPole dataset generation for a Decision Transformer (CS 446)"
+description = "Decision Transformer on CartPole: DQN dataset generation, DT/BC training and evaluation (CS 446)"
 requires-python = ">=3.12"
 dependencies = [
     "gymnasium[classic-control]>=1.4.0",
@@ -12,9 +12,17 @@ dependencies = [
 ]
 
 [[tool.uv.index]]
-name = "pytorch-cpu"
-url = "https://download.pytorch.org/whl/cpu"
+name = "pytorch-cu132"
+url = "https://download.pytorch.org/whl/cu132"
 explicit = true
 
 [tool.uv.sources]
-torch = [{ index = "pytorch-cpu" }]
+torch = [{ index = "pytorch-cu132", marker = "sys_platform == 'linux' or sys_platform == 'win32'" }]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
